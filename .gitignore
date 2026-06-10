@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+.DS_Store
+outputs/
+screenshots/
+data/processed/*.json
+data/raw_pdfs/*.pdf
+!data/raw_pdfs/.gitkeep

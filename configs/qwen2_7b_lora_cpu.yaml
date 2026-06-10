@@ -1,0 +1,35 @@
+model_name_or_path: Qwen/Qwen2-7B-Instruct
+stage: sft
+do_train: true
+finetuning_type: lora
+
+# 指向正确的 Day 2 处理数据目录
+dataset_dir: data/processed
+dataset: manual_alpaca
+template: qwen
+cutoff_len: 1024
+max_samples: 50   # CPU 小批量训练
+overwrite_cache: true
+preprocessing_num_workers: 2
+
+output_dir: outputs/qwen2_7b_lora_cpu
+logging_steps: 5
+save_steps: 50
+plot_loss: true
+overwrite_output_dir: true
+
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 1
+learning_rate: 5.0e-5
+num_train_epochs: 1
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+
+lora_rank: 4
+lora_alpha: 8
+lora_dropout: 0.05
+lora_target: all
+
+bf16: false
+fp16: false
+# device_map 去掉，避免 CPU 报错
