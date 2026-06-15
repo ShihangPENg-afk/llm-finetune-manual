@@ -2,7 +2,7 @@
 
 > 最后核对：2026-06-10  
 > 关联文档：[README.md](../README.md) · [experiment_record.md](experiment_record.md)  
-> 关联主项目：[rag-agent](../../rag-agent)（LoRA 尚未接入）
+> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（LoRA 尚未接入）
 
 ---
 

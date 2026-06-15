@@ -2,7 +2,7 @@
 
 > 实验日期：2026-06-09  
 > 仓库：[llm-finetune-manual](../README.md)  
-> 关联主项目：[rag-agent](../../rag-agent)（当前 LoRA 模型尚未接入）
+> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（当前 LoRA 模型尚未接入）
 
 ---
 
@@ -142,4 +142,4 @@
 
 - 仓库说明：[README.md](../README.md)
 - 训练配置：[configs/qwen2_7b_lora_cpu.yaml](../configs/qwen2_7b_lora_cpu.yaml)
-- rag-agent 项目：[rag-agent/README.md](../../rag-agent/README.md)
+- rag-agent 项目：[README.md](https://github.com/ShihangPENg-afk/rag-agent/blob/main/README.md)
