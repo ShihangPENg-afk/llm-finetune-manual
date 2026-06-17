@@ -1,8 +1,9 @@
 # LoRA 微调实验记录
 
 > 实验日期：2026-06-09  
-> 仓库：[llm-finetune-manual](../README.md)  
-> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（当前 LoRA 模型尚未接入）
+> 仓库：[llm-finetune-for-manufacturing](../README.md) · [English](../README.en.md)  
+> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（当前 LoRA 模型尚未接入）  
+> **说明：** 下文 `outputs/` 路径下的 loss 图、adapter 权重等为本地实验产物，clone 后需自行训练生成。
 
 ---
 

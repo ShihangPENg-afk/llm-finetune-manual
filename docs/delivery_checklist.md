@@ -1,7 +1,7 @@
-# llm-finetune-manual 验收清单
+# llm-finetune-for-manufacturing 验收清单
 
 > 最后核对：2026-06-10  
-> 关联文档：[README.md](../README.md) · [experiment_record.md](experiment_record.md)  
+> 关联文档：[README.md](../README.md) · [README.en.md](../README.en.md) · [experiment_record.md](experiment_record.md)  
 > 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（LoRA 尚未接入）
 
 ---
@@ -171,4 +171,4 @@ bash scripts/train_qwen2_7b_lora_cpu.sh
 
 ## 验收结论
 
-满足 **第 1–8 节** 全部勾选项后，可认为 llm-finetune-manual **CPU 流程验证验收通过**。第 9 节未完成项作为后续迭代 backlog，不影响「PDF → Alpaca → LoRA 训练 → 权重保存」链路已跑通的结论。
+满足 **第 1–8 节** 全部勾选项后，可认为 llm-finetune-for-manufacturing **CPU 流程验证验收通过**。第 9 节未完成项作为后续迭代 backlog，不影响「PDF → Alpaca → LoRA 训练 → 权重保存」链路已跑通的结论。

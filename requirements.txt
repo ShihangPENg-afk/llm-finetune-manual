@@ -1,0 +1,5 @@
+# Data pipeline
+pymupdf>=1.24.0
+
+# LoRA training & optional eval (LLaMA-Factory pulls torch/transformers/peft)
+llamafactory>=0.9.3

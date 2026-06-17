@@ -1,6 +1,7 @@
-# llm-finetune-manual
+# llm-finetune-for-manufacturing
 
-> 项目仓库：https://github.com/ShihangPENg-afk/llm-finetune-manual
+> 项目仓库：https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing  
+> English: [README.en.md](README.en.md)
 
 独立的 **LoRA 微调实验仓库**，用于验证从 PDF 技术手册到 Alpaca 格式数据集，再到 [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) LoRA 微调的完整流程。
 
@@ -12,7 +13,7 @@
 
 | 仓库 | GitHub | 说明 |
 |------|--------|------|
-| **llm-finetune-manual** | https://github.com/ShihangPENg-afk/llm-finetune-manual | 本仓库：PDF → LoRA 微调实验 |
+| **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | 本仓库：PDF → LoRA 微调实验 |
 | **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG 主应用（LoRA **尚未接入**） |
 | **industrial-health-demo** | https://github.com/ShihangPENg-afk/industrial-health-demo | 工业 ML 推理 API（与本仓库无代码依赖） |
 
@@ -23,7 +24,7 @@
 | 项目 | GitHub | 职责 | 当前状态 |
 |------|--------|------|----------|
 | **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG 问答服务：PDF 上传、FAISS 检索、LangGraph Agent、RAGAS 评估 | 主应用仓库（工程化 POC） |
-| **llm-finetune-manual** | https://github.com/ShihangPENg-afk/llm-finetune-manual | PDF → Alpaca 数据集 → Qwen2-7B LoRA 微调 | 本仓库 |
+| **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | PDF → Alpaca 数据集 → Qwen2-7B LoRA 微调 | 本仓库 |
 
 **两者关系：**
 
@@ -60,7 +61,7 @@ LLaMA-Factory 数据集注册（manual_alpaca）
 
 | 属性 | 值 |
 |------|-----|
-| 样本数 | **132** |
+| 样本数 | **132**（本地实验：5 份 PDF） |
 | instruction 模板数 | **4**（轮换分配，避免单一指令过拟合） |
 | 数据格式 | Alpaca（`instruction` / `input` / `output`） |
 | 数据集名称 | `manual_alpaca` |
@@ -95,7 +96,7 @@ instruction 模板示例：
 | 配置项 | 值 |
 |--------|-----|
 | 基座模型 | `Qwen/Qwen2-7B-Instruct` |
-| 微调框架 | [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory) |
+| 微调框架 | [LLaMA-Factory](https://github.com/hiyouga/LLaMA-Factory)（本地验证 `>=0.9.3`） |
 | 微调方式 | LoRA（`rank: 4`, `alpha: 8`） |
 | 训练环境 | Intel MacBook Pro CPU（x86_64，16GB 内存，无 GPU/MPS） |
 | 数据集 | `manual_alpaca` |
@@ -107,7 +108,7 @@ instruction 模板示例：
 
 **定位说明：** 本地 CPU 环境仅用于**流程可复现验证**，而非追求模型效果。50 条样本、1 个 epoch 的配置足以确认数据管线与训练脚本可正常工作；正式训练应在 GPU 服务器上完成。
 
-> **Clone 后数据处理：** 仓库不提交 `data/processed/*.json` 与 `data/raw_pdfs/*.pdf`。首次运行前须将 PDF 放入 `data/raw_pdfs/`，再执行 `extract_chunks.py` 与 `build_alpaca_dataset.py` 生成 `chunks.json`、`alpaca_train.json` 与 `dataset_info.json`。
+> **Clone 后数据处理：** 仓库不提交 `data/processed/*.json` 与 `data/raw_pdfs/*.pdf`。首次运行前须将 PDF 放入 `data/raw_pdfs/`，再执行 `extract_chunks.py` 与 `build_alpaca_dataset.py` 生成 `chunks.json`、`alpaca_train.json` 与 `dataset_info.json`。文档中的 132 条样本数来自本地 5 份合成/演示 PDF（`manual1.pdf` ~ `manual5.pdf`）的实验结果。
 
 ---
 
@@ -116,17 +117,15 @@ instruction 模板示例：
 克隆本仓库：
 
 ```bash
-git clone https://github.com/ShihangPENg-afk/llm-finetune-manual.git
-cd llm-finetune-manual
+git clone https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing.git
+cd llm-finetune-for-manufacturing
 ```
 
 在项目根目录执行：
 
 ```bash
 # 0. 安装依赖
-pip install pymupdf
-# 训练环境另需 LLaMA-Factory，见官方文档：
-# pip install llamafactory
+pip install -r requirements.txt
 
 # 1. PDF 切块
 python scripts/extract_chunks.py data/raw_pdfs/
@@ -163,7 +162,14 @@ python scripts/eval_before_after_cpu.py --phase after
 - **LoRA 模型尚未接入 rag-agent**：微调权重保存在本仓库 `outputs/`，rag-agent 仍使用 DashScope 在线 API，两者尚未打通。
 - **无生产鉴权、未云部署**：训练与权重均为本地实验产物。
 
-详细实验记录见 [docs/experiment_record.md](docs/experiment_record.md)。
+---
+
+## 文档
+
+| 文档 | 说明 |
+|------|------|
+| [docs/experiment_record.md](docs/experiment_record.md) | 实验记录（硬件、loss、adapter 输出） |
+| [docs/delivery_checklist.md](docs/delivery_checklist.md) | CPU 流程验收清单 |
 
 ---
 
@@ -179,11 +185,11 @@ python scripts/eval_before_after_cpu.py --phase after
 
 ```
 data/
-  raw_pdfs/              # 原始 PDF（*.pdf 已被 .gitignore 忽略）
+  raw_pdfs/              # 原始 PDF（*.pdf 已被 .gitignore 忽略，本地放置）
   processed/
-    chunks.json          # 文本切块
-    alpaca_train.json    # Alpaca 微调数据（132 条）
-    dataset_info.json    # LLaMA-Factory 数据集配置
+    chunks.json          # 文本切块（本地生成，.gitignore）
+    alpaca_train.json    # Alpaca 微调数据（本地生成，.gitignore）
+    dataset_info.json    # LLaMA-Factory 数据集配置（本地生成，.gitignore）
 configs/
   qwen2_7b_lora_cpu.yaml # CPU LoRA 训练配置
 scripts/
@@ -195,4 +201,9 @@ scripts/
 outputs/                 # 训练输出（LoRA 权重、日志，已被 .gitignore 忽略）
 docs/
   experiment_record.md   # 实验记录
+  delivery_checklist.md  # 验收清单
+LICENSE
+requirements.txt
+README.md                # 中文（本文件）
+README.en.md             # 英文
 ```
