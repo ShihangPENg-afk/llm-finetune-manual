@@ -14,23 +14,23 @@ This repo does **not** aim to ship a production-ready model. It verifies the end
 | Repository | GitHub | Description |
 |------------|--------|-------------|
 | **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | This repo: PDF → LoRA fine-tuning experiment |
-| **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG main app (LoRA **not integrated yet**) |
-| **industrial-health-demo** | https://github.com/ShihangPENg-afk/industrial-health-demo | Industrial ML inference API (no code dependency on this repo) |
+| **rag-agentic-system** | https://github.com/ShihangPENg-afk/rag-agentic-system | Agentic RAG main app (LoRA **not integrated yet**) |
+| **predictive-maintenance-mini** | https://github.com/ShihangPENg-afk/predictive-maintenance-mini | Industrial ML inference API (no code dependency on this repo) |
 
 ---
 
-## Relationship with rag-agent
+## Relationship with rag-agentic-system
 
 | Project | GitHub | Role | Status |
 |---------|--------|------|--------|
-| **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG Q&A: PDF upload, FAISS retrieval, LangGraph agent, RAGAS eval | Main application repo (engineering POC) |
+| **rag-agentic-system** | https://github.com/ShihangPENg-afk/rag-agentic-system | Agentic RAG Q&A: PDF upload, FAISS retrieval, LangGraph agent, RAGAS eval | Main application repo (engineering POC) |
 | **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | PDF → Alpaca dataset → Qwen2-7B LoRA fine-tuning | This repo |
 
 **How they relate:**
 
 - Both sit on the same PDF knowledge pipeline at different stages, but **code, dependencies, and deployment are fully independent**, each with its own virtual environment.
-- **The LoRA fine-tuned model is not integrated into rag-agent yet.** rag-agent’s generation node and RAGAS evaluation still call the DashScope online API (`qwen-plus`); they do not load adapter weights from this repo’s `outputs/`.
-- rag-agent RAGAS metrics (faithfulness, answer_relevancy, etc.) **only reflect online API Q&A performance** and are not directly comparable to training loss or before/after results in this repo.
+- **The LoRA fine-tuned model is not integrated into rag-agentic-system yet.** rag-agentic-system’s generation node and RAGAS evaluation still call the DashScope online API (`qwen-plus`); they do not load adapter weights from this repo’s `outputs/`.
+- rag-agentic-system RAGAS metrics (faithfulness, answer_relevancy, etc.) **only reflect online API Q&A performance** and are not directly comparable to training loss or before/after results in this repo.
 
 ---
 
@@ -161,7 +161,7 @@ After a successful run:
 
 - **Local hardware:** Experiments ran on Intel MacBook Pro CPU (16GB, no GPU). First base-model download ~1h+; 50 training steps ~4h; full 7B CPU inference often OOMs or takes 30–60+ min per question—**not suitable** for full local training or eval.
 - **Workflow-only scope:** `max_samples: 50` and 1 epoch verify the pipeline only; **not sufficient for a usable domain model**.
-- **LoRA not in rag-agent:** Weights live under this repo’s `outputs/`; rag-agent still uses DashScope online API—**not connected yet**.
+- **LoRA not in rag-agentic-system:** Weights live under this repo’s `outputs/`; rag-agentic-system still uses DashScope online API—**not connected yet**.
 - **No production auth or cloud deploy:** Training and weights are local experiment artifacts.
 
 ---
@@ -179,7 +179,7 @@ After a successful run:
 
 - Move data pipeline and training config to a GPU server; train on all 132 samples with more epochs
 - Run before/after evaluation on GPU
-- Evaluate integrating the LoRA adapter into rag-agent’s generation node (**not integrated yet**)
+- Evaluate integrating the LoRA adapter into rag-agentic-system’s generation node (**not integrated yet**)
 
 ---
 

@@ -2,7 +2,7 @@
 
 > 最后核对：2026-06-10  
 > 关联文档：[README.md](../README.md) · [README.en.md](../README.en.md) · [experiment_record.md](experiment_record.md)  
-> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（LoRA 尚未接入）
+> 关联主项目：[rag-agentic-system](https://github.com/ShihangPENg-afk/rag-agentic-system)（LoRA 尚未接入）
 
 ---
 
@@ -13,7 +13,7 @@
 | 数据处理（PDF → Alpaca） | 已完成 |
 | LLaMA-Factory 配置与训练 | 已完成 |
 | 文档与实验记录 | 已完成 |
-| 效果评测与 rag-agent 接入 | 未完成（见第 9 节） |
+| 效果评测与 rag-agentic-system 接入 | 未完成（见第 9 节） |
 
 ---
 
@@ -149,10 +149,10 @@ bash scripts/train_qwen2_7b_lora_cpu.sh
 - [x] 说明实验环境为 Intel MacBook Pro CPU，无 GPU/MPS
 - [x] 说明 `max_samples: 50`、1 epoch 仅为流程验证
 - [x] 说明本地 CPU 硬件约束下不建议完整训练与推理评测
-- [x] 说明 LoRA 模型尚未接入 rag-agent
+- [x] 说明 LoRA 模型尚未接入 rag-agentic-system
 - [x] 说明后续应迁移至 GPU 服务器完成正式训练
 
-**对应章节：** [README.md](../README.md) 中的「训练配置」「当前限制」「与 rag-agent 的关系」。
+**对应章节：** [README.md](../README.md) 中的「训练配置」「当前限制」「与 rag-agentic-system 的关系」。
 
 ---
 
@@ -163,7 +163,7 @@ bash scripts/train_qwen2_7b_lora_cpu.sh
 | before/after 效果对比 | 未完成 | `eval_before_after_cpu.py` 已就绪；16GB CPU 下 7B 推理不具可行性且易 OOM |
 | 全量样本正式训练 | 未完成 | 当前仅训练 50/132 条、1 epoch，不足以获得可用领域模型 |
 | GPU 环境迁移 | 未完成 | 需在 GPU 服务器上使用全量数据与更多 epoch 重训 |
-| LoRA 接入 rag-agent | 未完成 | rag-agent 仍使用 DashScope 在线 API，未加载本仓库 adapter 权重 |
+| LoRA 接入 rag-agentic-system | 未完成 | rag-agentic-system 仍使用 DashScope 在线 API，未加载本仓库 adapter 权重 |
 | 训练输出提交 Git | 不适用 | `outputs/` 已被 `.gitignore` 忽略，权重仅保留在本地 |
 | 验证集与 eval 指标 | 未完成 | 训练配置未划分验证集，无 `eval_loss` / `eval_accuracy` |
 

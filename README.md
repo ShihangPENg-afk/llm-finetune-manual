@@ -14,23 +14,23 @@
 | 仓库 | GitHub | 说明 |
 |------|--------|------|
 | **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | 本仓库：PDF → LoRA 微调实验 |
-| **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG 主应用（LoRA **尚未接入**） |
-| **industrial-health-demo** | https://github.com/ShihangPENg-afk/industrial-health-demo | 工业 ML 推理 API（与本仓库无代码依赖） |
+| **rag-agentic-system** | https://github.com/ShihangPENg-afk/rag-agentic-system | Agentic RAG 主应用（LoRA **尚未接入**） |
+| **predictive-maintenance-mini** | https://github.com/ShihangPENg-afk/predictive-maintenance-mini | 工业 ML 推理 API（与本仓库无代码依赖） |
 
 ---
 
-## 与 rag-agent 的关系
+## 与 rag-agentic-system 的关系
 
 | 项目 | GitHub | 职责 | 当前状态 |
 |------|--------|------|----------|
-| **rag-agent** | https://github.com/ShihangPENg-afk/rag-agent | Agentic RAG 问答服务：PDF 上传、FAISS 检索、LangGraph Agent、RAGAS 评估 | 主应用仓库（工程化 POC） |
+| **rag-agentic-system** | https://github.com/ShihangPENg-afk/rag-agentic-system | Agentic RAG 问答服务：PDF 上传、FAISS 检索、LangGraph Agent、RAGAS 评估 | 主应用仓库（工程化 POC） |
 | **llm-finetune-for-manufacturing** | https://github.com/ShihangPENg-afk/llm-finetune-for-manufacturing | PDF → Alpaca 数据集 → Qwen2-7B LoRA 微调 | 本仓库 |
 
 **两者关系：**
 
 - 同属 PDF 知识处理链路的不同阶段，但**代码、依赖与部署完全独立**，各自维护独立的虚拟环境。
-- **当前 LoRA 微调模型尚未接入 rag-agent**。rag-agent 的生成节点与 RAGAS 评估仍调用 DashScope 在线 API（`qwen-plus`），未加载本仓库 `outputs/` 下的 adapter 权重。
-- rag-agent 的 RAGAS 指标（faithfulness、answer_relevancy 等）**仅反映在线 API 下的问答表现**，与本仓库的训练 loss 或微调前后对比结果无直接关联。
+- **当前 LoRA 微调模型尚未接入 rag-agentic-system**。rag-agentic-system 的生成节点与 RAGAS 评估仍调用 DashScope 在线 API（`qwen-plus`），未加载本仓库 `outputs/` 下的 adapter 权重。
+- rag-agentic-system 的 RAGAS 指标（faithfulness、answer_relevancy 等）**仅反映在线 API 下的问答表现**，与本仓库的训练 loss 或微调前后对比结果无直接关联。
 
 ---
 
@@ -159,7 +159,7 @@ python scripts/eval_before_after_cpu.py --phase after
 
 - **本地硬件约束**：实验在 Intel MacBook Pro CPU（16GB、无 GPU）上完成。7B 基座首次下载约 1h+；50 step 训练约 4h；全量 CPU 推理易 OOM 或单题耗时过长，**不适合**本地完整训练与评测。
 - **流程验证定位**：当前 `max_samples: 50`、1 epoch 仅为 workflow 验证，不足以获得可用领域模型。
-- **LoRA 模型尚未接入 rag-agent**：微调权重保存在本仓库 `outputs/`，rag-agent 仍使用 DashScope 在线 API，两者尚未打通。
+- **LoRA 模型尚未接入 rag-agentic-system**：微调权重保存在本仓库 `outputs/`，rag-agentic-system 仍使用 DashScope 在线 API，两者尚未打通。
 - **无生产鉴权、未云部署**：训练与权重均为本地实验产物。
 
 ---
@@ -177,7 +177,7 @@ python scripts/eval_before_after_cpu.py --phase after
 
 - 将数据管线与训练配置迁移至 GPU 服务器，使用全量 132 条样本与更多 epoch 完成正式训练
 - 在 GPU 环境完成 before/after 效果评测
-- 评估是否将 LoRA adapter 接入 rag-agent 生成节点（**当前尚未接入**）
+- 评估是否将 LoRA adapter 接入 rag-agentic-system 生成节点（**当前尚未接入**）
 
 ---
 

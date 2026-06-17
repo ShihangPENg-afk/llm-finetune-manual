@@ -2,7 +2,7 @@
 
 > 实验日期：2026-06-09  
 > 仓库：[llm-finetune-for-manufacturing](../README.md) · [English](../README.en.md)  
-> 关联主项目：[rag-agent](https://github.com/ShihangPENg-afk/rag-agent)（当前 LoRA 模型尚未接入）  
+> 关联主项目：[rag-agentic-system](https://github.com/ShihangPENg-afk/rag-agentic-system)（当前 LoRA 模型尚未接入）  
 > **说明：** 下文 `outputs/` 路径下的 loss 图、adapter 权重等为本地实验产物，clone 后需自行训练生成。
 
 ---
@@ -127,7 +127,7 @@
 2. **本地 CPU 推理限制**：16GB 内存下 7B 全量推理易 OOM 或单题耗时过长，before/after 评测难以在本机完成。
 3. **训练规模受限**：`max_samples=50`、1 epoch 仅为流程验证，不足以获得可用领域模型。
 4. **实验定位**：当前实验用于**流程验证**，loss 下降仅说明模型在 50 条样本上拟合，不代表领域问答效果提升。
-5. **尚未接入 rag-agent**：微调权重保存在本仓库 `outputs/`，rag-agent 仍使用 DashScope 在线 API，两者未打通。
+5. **尚未接入 rag-agentic-system**：微调权重保存在本仓库 `outputs/`，rag-agentic-system 仍使用 DashScope 在线 API，两者未打通。
 
 ---
 
@@ -137,10 +137,10 @@
 |--------|------|------|
 | 1 | **迁移到 GPU 环境** | 使用全量 132 条样本、更多 epoch 完成正式训练，缩短训练与推理时间 |
 | 2 | **做 before/after 对比** | 在 GPU 或 32GB+ 内存环境运行 `eval_before_after_cpu.py`，对比基座模型与 LoRA 模型的领域回答 |
-| 3 | **可选接入 rag-agent** | 评估微调效果后，将 LoRA adapter 接入 rag-agent 生成节点，替换或补充 DashScope 在线 API |
+| 3 | **可选接入 rag-agentic-system** | 评估微调效果后，将 LoRA adapter 接入 rag-agentic-system 生成节点，替换或补充 DashScope 在线 API |
 
 相关文档：
 
 - 仓库说明：[README.md](../README.md)
 - 训练配置：[configs/qwen2_7b_lora_cpu.yaml](../configs/qwen2_7b_lora_cpu.yaml)
-- rag-agent 项目：[README.md](https://github.com/ShihangPENg-afk/rag-agent/blob/main/README.md)
+- rag-agentic-system 项目：[README.md](https://github.com/ShihangPENg-afk/rag-agentic-system/blob/main/README.md)
